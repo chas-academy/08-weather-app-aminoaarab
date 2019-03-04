@@ -26,16 +26,53 @@ class App extends React.Component {
    
     
     console.log(response);
-  
+
+    if(city && country){
+    this.setState({
+      temperature: response.main.temp,
+      city: response.name,
+      country: response.sys.country,
+      humidity: response.main.humidity,
+      wind: response.wind.speed,
+      sunrise: response.sys.sunrise,
+      sunset: response.sys.sunset,
+      description: response.weather[0].description,
+      error: ""
+    })
+  } else {
+    this.setState({
+      error: "Please enter the values..."
+  })
+}
   }
   
+  state = {
+    temperature: undefined,
+    city: undefined,
+    country: undefined,
+    humidity: undefined,
+    wind: undefined,
+    sunrise: undefined,
+    sunset: undefined,
+    description: undefined,
+    error: undefined
+  }
 
   render() {
     return (
       <div>
         <Titles />
         <Form loadWeather={this.getWeather} />
-        <Weather />
+        <Weather
+          temperature={this.state.temperature}
+          city={this.state.city}
+          country={this.state.country}
+          humidity={this.state.humidity}
+          wind={this.state.wind}
+          sunrise={this.state.sunrise}
+          sunset={this.state.sunset}
+          description={this.state.description}
+          error={this.state.error} />
       </div>
     );
   }

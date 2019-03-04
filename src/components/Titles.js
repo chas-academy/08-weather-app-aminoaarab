@@ -3,8 +3,7 @@ import React from 'react'
 const Title = (props) => {
     return (
         <div>
-            <h2>Weather App</h2>
-            <p>Helps you found weahter conditions in citis</p>
+            <h2 className="title">Weather App</h2>
         </div>
     )
 }
