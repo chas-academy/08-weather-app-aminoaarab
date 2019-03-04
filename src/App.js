@@ -1,25 +1,36 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-class App extends Component {
+import Form from './components/Form';
+import Titles from './components/Titles';
+import Weather from './components/Weather';
+
+
+const apiKey = 'd40af4df2e41f1f1f3a68c4092b6a163';
+
+
+
+
+class App extends React.Component {
+  getWeather = async (e) => {
+    e.preventDefault();
+
+    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=london,uk&appid=${apiKey}`);
+    
+    const response = await api_call.json();
+
+    
+    console.log(response);
+  
+  }
+  
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <Titles />
+        <Form loadWeather={this.getWeather} />
+        <Weather />
       </div>
     );
   }
