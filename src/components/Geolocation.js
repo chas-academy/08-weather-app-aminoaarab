@@ -34,7 +34,7 @@ class Geolocation extends Component {
                             humidity: res.data.currently.humidity,
                             timezone: res.data.timezone,
                             weeklyWeather: res.data.daily.data,
-                            hourlyWeather: res.data.hourly.data.filter((_,i) => i % 3 === 0)
+                            hourlyWeather: res.data.hourly.data.filter((_, i) => i % 3 === 0)
                         })
                         console.log(res);
                     })
@@ -44,9 +44,10 @@ class Geolocation extends Component {
 
     render() {
         const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTIme, weeklyWeather, hourlyWeather } = this.state;
-        
+
         const weekWeather = weeklyWeather.map((week, index) =>
             <ul key={index}>
+                <li>{new Date(week.time * 1000).toLocaleDateString('it-IT')}</li>
                 <li>{week.summary}</li>
             </ul>
 
@@ -54,12 +55,13 @@ class Geolocation extends Component {
         )
         const hourWeather = hourlyWeather.map((hour, index) =>
             <ul key={index}>
-                <li>{new Date(hour.time * 1000).toLocaleTimeString('it-IT')}</li>
+                <li className="hourlyWeather">{new Date(hour.time * 1000).toLocaleTimeString('it-IT')}</li>
+                <li className="hourlyWeather">{hour.temperature}</li>
             </ul>
         )
         return (
-            <section>
-                <div className="GeolocationHead">
+            <section className="GeolocationHead">
+                <div className="infoCurrentLocation">
                     <h3>Hello, the current weather information at your location.</h3>
                     <h5>Location: {timezone}</h5>
                     <ul>
@@ -69,14 +71,21 @@ class Geolocation extends Component {
                         <li>Sunrise: {new Date(sunriseTime * 1000).toLocaleTimeString('it-IT')}</li>
                         <li>Sunset: {new Date(sunsetTIme * 1000).toLocaleTimeString('it-IT')}</li>
                     </ul>
-                    <div>
-                        <div>{weekWeather}</div>
-                    </div>
-                    <div>
-                        <div>Every 3rd hour: {hourWeather}</div>
-                    </div>
                 </div>
 
+                <div>
+                    <ul>
+                        <li className="weekSum">Week Summary:{weekWeather}</li>
+                    </ul>
+
+                </div>
+
+                <div>
+                    <h3>Every 3rd hour:</h3>
+                    <ul>
+                        <li className="hourlyWeather">{hourWeather}</li>
+                    </ul>
+                </div>
             </section>
         );
     }

@@ -8,12 +8,17 @@ import Weather from './components/Weather';
 import Geolocation from './components/Geolocation';
 import Navbar from './components/Navbar';
 
-function App () {
+function App() {
   return (
-    <div>
-    <Navbar />
-    <Geolocation />
-    </div>
+    <section>
+      <div>
+        <Navbar />
+      </div>
+      <div className="GeolocationHeadAndFrom">
+        <Geolocation />
+        <Form />
+      </div>
+    </section>
   )
 }
 
