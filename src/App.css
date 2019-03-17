@@ -11,10 +11,6 @@ body {
   height: 100%;
 }
 
-ul {
-  list-style-type: none;
-}
-
 .Navbar {
   background-color: rgb(15, 15, 15);
 
@@ -51,6 +47,14 @@ width: 50%;
   flex-wrap: wrap;
 }
 
-a {
-  color: aliceblue
+.input {
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+}
+
+h5 {
+  font-size: 20px;
 }

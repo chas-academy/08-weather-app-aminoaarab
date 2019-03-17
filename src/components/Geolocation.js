@@ -17,14 +17,33 @@ class Geolocation extends Component {
         sunrise: [],
         sunset: [],
         weeklyWeather: [],
-        hourlyWeather: []
+        hourlyWeather: [],
+        isCelsius: true
     }
 
+  
     componentDidMount() {
+        this.toggleTemp()
+    }
+
+        toggleTemp = () => {
+    
+
+            this.setState(prevState => ({
+              isCelsius: !prevState.isCelsius
+            }))
+         
+            let tempApi
+            
+            if (this.state.isCelsius) {
+              tempApi = "?units=si"
+            } else {
+              tempApi = ""
+            }
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
-                axios.get(`${darkskyBaseUrl}/${darkKey}/${position.coords.latitude},${position.coords.longitude}`)
+                axios.get(`${darkskyBaseUrl}/${darkKey}/${position.coords.latitude},${position.coords.longitude}${tempApi}`)
                     .then(res => {
                         this.setState({
                             sunriseTime: res.data.daily.data[0].sunriseTime,
@@ -63,27 +82,28 @@ class Geolocation extends Component {
             <section className="GeolocationHead">
                 <div className="infoCurrentLocation">
                     <h3>Hello, the current weather information at your location.</h3>
+                    <button onClick={this.toggleTemp}>Fahrenheit/Celcius</button>
                     <h5>Location: {timezone}</h5>
                     <ul>
-                        <li>Temperature: {temperature}F</li>
+                        <li>Temperature: {temperature}</li>
                         <li>Wind gust: {windGust}</li>
                         <li>Humidity: {humidity}</li>
                         <li>Sunrise: {new Date(sunriseTime * 1000).toLocaleTimeString('it-IT')}</li>
                         <li>Sunset: {new Date(sunsetTIme * 1000).toLocaleTimeString('it-IT')}</li>
                     </ul>
                 </div>
-
-                <div>
-                    <ul>
-                        <li className="weekSum">Week Summary:{weekWeather}</li>
-                    </ul>
-
-                </div>
-
+            
                 <div>
                     <h3>Every 3rd hour:</h3>
                     <ul>
                         <li className="hourlyWeather">{hourWeather}</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3>Week Summary:</h3>
+                    <ul>
+                        <li className="weekSum">{weekWeather}</li>
                     </ul>
                 </div>
             </section>
