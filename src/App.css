@@ -19,32 +19,42 @@ body {
   color: white;
 }
 
-.GeolocationHeadAndFrom {
-  display: flex;
-  flex-direction: row
-}
 .GeolocationHead {
-width: 50%;
+  color: black;
 }
 
-.infoCurrentLocation{
-  border: 2px solid black;
- 
-}
+.infoGeoLoc{
+  margin-top: 1%;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-size: 20px;
+  }
 
 .weekSum {
   width: 50%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
+  border: 2px solid black;
+
+  text-align: center;
+  margin-top: 2%;
+  margin-left: 25%;
+  margin-right: 25%;
+  padding: 2%;
 }
 
 .hourlyWeather {
- border-left: 2px solid black;
- width: 50%;
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+
+  text-align: center;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
+
+  justify-content: flex-start;
 }
 
 .input {
@@ -56,5 +66,15 @@ ul {
 }
 
 h5 {
-  font-size: 20px;
+  font-size: 25px;
+  color: black;
+  
 }
+
+h3 {
+  margin-top: 4%;
+  margin-bottom: 1%;
+  text-align: center;
+}
+
+ 
