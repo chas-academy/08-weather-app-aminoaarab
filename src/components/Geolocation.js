@@ -29,7 +29,6 @@ class Geolocation extends Component {
 
     toggleTemp = () => {
 
-
         this.setState(prevState => ({
             isCelsius: !prevState.isCelsius
         }))
@@ -54,7 +53,7 @@ class Geolocation extends Component {
                             humidity: res.data.currently.humidity,
                             timezone: res.data.timezone,
                             weeklyWeather: res.data.daily.data.slice(0, 5),
-                            hourlyWeather: res.data.hourly.data.filter((_, i) => i % 3 === 0)
+                            hourlyWeather: res.data.hourly.data.filter((_, i) => i % 3 === 0).slice(0, 6)
                         })
                         console.log(res);
                     })
@@ -72,14 +71,12 @@ class Geolocation extends Component {
                 <li>Max: {week.temperatureMax}°</li>
                 <li>Min: {week.temperatureMin}°</li>
             </ul>
-
-
         )
         const hourWeather = hourlyWeather.map((hour, index) =>
-               <ul key={index}  >
-                    <li className="hourlyWeather">Time: {new Date(hour.time * 1000).toLocaleString('it-IT')} Temperature: {hour.temperature}°</li>
-                    
-                </ul>      
+            <ul key={index} className="hourlyWeather" >
+                <li>Time: {new Date(hour.time * 1000).toLocaleString('it-IT')}</li>
+                <li>Temperature: {hour.temperature}°</li>
+            </ul>
         )
 
         return (
@@ -100,14 +97,14 @@ class Geolocation extends Component {
                 <div>
                     <h3>Every 3rd hour</h3>
                     <ul>
-                        <li className="hourlyWeather">{hourWeather}</li>
+                        <li className="hourCards">{hourWeather}</li>
                     </ul>
                 </div>
 
                 <div>
                     <h3>Weekly Summary</h3>
                     <ul>
-                        <li>{weekWeather}</li>
+                        <li className="weekCards" >{weekWeather}</li>
                     </ul>
                 </div>
             </section>

@@ -30,31 +30,36 @@ body {
   font-size: 20px;
   }
 
+.weekCards {
+  display: flex;
+  flex-direction: row;
+}
+
+.hourCards {
+  display: flex;
+  flex-direction: row;
+  
+
+}
+
 .weekSum {
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  border: 2px solid black;
 
+  border: 2px solid black;
   text-align: center;
-  margin-top: 2%;
-  margin-left: 25%;
-  margin-right: 25%;
-  padding: 2%;
 }
 
 .hourlyWeather {
-  margin-top: 2%;
-  margin-left: 10%;
-  margin-right: 10%;
-
-  text-align: center;
+  width: 15,5%;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;  
-
-  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 2%;
+  border: 2px solid black;
+  text-align: center;
 }
 
 .input {
