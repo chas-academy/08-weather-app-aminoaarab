@@ -1,15 +1,15 @@
 {
-  "main.css": "/08-weather-app-aminoaarab/static/css/main.cc7603c0.chunk.css",
-  "main.js": "/08-weather-app-aminoaarab/static/js/main.6fa3fe51.chunk.js",
-  "main.js.map": "/08-weather-app-aminoaarab/static/js/main.6fa3fe51.chunk.js.map",
-  "runtime~main.js": "/08-weather-app-aminoaarab/static/js/runtime~main.6f93a108.js",
-  "runtime~main.js.map": "/08-weather-app-aminoaarab/static/js/runtime~main.6f93a108.js.map",
-  "static/css/2.6e8c5d69.chunk.css": "/08-weather-app-aminoaarab/static/css/2.6e8c5d69.chunk.css",
-  "static/js/2.885ef5f6.chunk.js": "/08-weather-app-aminoaarab/static/js/2.885ef5f6.chunk.js",
-  "static/js/2.885ef5f6.chunk.js.map": "/08-weather-app-aminoaarab/static/js/2.885ef5f6.chunk.js.map",
-  "index.html": "/08-weather-app-aminoaarab/index.html",
-  "precache-manifest.7beaa78759d26accc43d2c65f0c7df26.js": "/08-weather-app-aminoaarab/precache-manifest.7beaa78759d26accc43d2c65f0c7df26.js",
-  "service-worker.js": "/08-weather-app-aminoaarab/service-worker.js",
-  "static/css/2.6e8c5d69.chunk.css.map": "/08-weather-app-aminoaarab/static/css/2.6e8c5d69.chunk.css.map",
-  "static/css/main.cc7603c0.chunk.css.map": "/08-weather-app-aminoaarab/static/css/main.cc7603c0.chunk.css.map"
+  "main.css": "/weather-app/static/css/main.cc7603c0.chunk.css",
+  "main.js": "/weather-app/static/js/main.aa097f88.chunk.js",
+  "main.js.map": "/weather-app/static/js/main.aa097f88.chunk.js.map",
+  "runtime~main.js": "/weather-app/static/js/runtime~main.8d9c99a4.js",
+  "runtime~main.js.map": "/weather-app/static/js/runtime~main.8d9c99a4.js.map",
+  "static/css/2.6e8c5d69.chunk.css": "/weather-app/static/css/2.6e8c5d69.chunk.css",
+  "static/js/2.885ef5f6.chunk.js": "/weather-app/static/js/2.885ef5f6.chunk.js",
+  "static/js/2.885ef5f6.chunk.js.map": "/weather-app/static/js/2.885ef5f6.chunk.js.map",
+  "index.html": "/weather-app/index.html",
+  "precache-manifest.4f405392c1d6e6dbf81216c1853e7465.js": "/weather-app/precache-manifest.4f405392c1d6e6dbf81216c1853e7465.js",
+  "service-worker.js": "/weather-app/service-worker.js",
+  "static/css/2.6e8c5d69.chunk.css.map": "/weather-app/static/css/2.6e8c5d69.chunk.css.map",
+  "static/css/main.cc7603c0.chunk.css.map": "/weather-app/static/css/main.cc7603c0.chunk.css.map"
 }
