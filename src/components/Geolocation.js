@@ -74,7 +74,7 @@ class Geolocation extends Component {
         )
         const hourWeather = hourlyWeather.map((hour, index) =>
             <ul key={index} className="hourlyWeather" >
-                <li>Time: {new Date(hour.time * 1000).toLocaleString('it-IT')}</li>
+                <li>Date: {new Date(hour.time * 1000).toLocaleString('it-IT')}</li>
                 <li>Temperature: {hour.temperature}°</li>
             </ul>
         )
