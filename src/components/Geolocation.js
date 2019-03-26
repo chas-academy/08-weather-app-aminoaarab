@@ -19,35 +19,27 @@ class Geolocation extends Component {
         sunset: [],
         weeklyWeather: [],
         hourlyWeather: [],
-        isCelsius: true
+        isCelsius: false
     }
 
 
     componentDidMount() {
         this.toggleTemp()
-    }
+     }
 
     toggleTemp = () => {
 
-        this.setState(prevState => ({
-            isCelsius: !prevState.isCelsius
-        }))
-
-        let tempApi
-
-        if (this.state.isCelsius) {
-            tempApi = "?units=si"
-        } else {
-            tempApi = ""
-        }
+        this.setState({
+            isCelsius: !this.state.isCelsius
+        })
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
-                axios.get(`${darkskyBaseUrl}/${darkKey}/${position.coords.latitude},${position.coords.longitude}${tempApi}`)
+                axios.get(`${darkskyBaseUrl}/${darkKey}/${position.coords.latitude},${position.coords.longitude}`)
                     .then(res => {
                         this.setState({
                             sunriseTime: res.data.daily.data[0].sunriseTime,
-                            sunsetTIme: res.data.daily.data[0].sunsetTime,
+                            sunsetTime: res.data.daily.data[0].sunsetTime,
                             temperature: res.data.currently.temperature,
                             windGust: res.data.currently.windGust,
                             humidity: res.data.currently.humidity,
@@ -58,24 +50,26 @@ class Geolocation extends Component {
                         console.log(res);
                     })
             })
+        } else {
+            console.log("something went wrong")
         }
     }
 
     render() {
-        const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTIme, weeklyWeather, hourlyWeather } = this.state;
+        const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTime, weeklyWeather, hourlyWeather } = this.state;
 
         const weekWeather = weeklyWeather.map((week, index) =>
             <ul key={index} className="weekSum">
                 <li>{new Date(week.time * 1000).toLocaleDateString('it-IT')}</li>
                 <li>{week.summary}</li>
-                <li>Max: {week.temperatureMax}°</li>
-                <li>Min: {week.temperatureMin}°</li>
+                <li>Max: {this.state.isCelsius ? ((week.temperatureMax - 32) * 5 / 9).toFixed(0) + ' °C' : week.temperatureMax + ' °F'}</li>
+                <li>Min: {this.state.isCelsius ? ((week.temperatureMin - 32) * 5 / 9).toFixed(0) + ' °C' : week.temperatureMin + ' °F'}</li>
             </ul>
         )
         const hourWeather = hourlyWeather.map((hour, index) =>
             <ul key={index} className="hourlyWeather" >
                 <li>Date: {new Date(hour.time * 1000).toLocaleString('it-IT')}</li>
-                <li>Temperature: {hour.temperature}°</li>
+                <li>Temperature: {this.state.isCelsius ? ((hour.temperature - 32) * 5 / 9).toFixed(0) + ' °C' : hour.temperature + ' °F'}</li>
             </ul>
         )
 
@@ -83,14 +77,14 @@ class Geolocation extends Component {
             <section className="GeolocationHead">
                 <h3>Hello, the current weather at your location.</h3>
                 <div className="infoGeoLoc">
-                    <button onClick={this.toggleTemp} type="button" className="btn btn-primary">°F/°C</button>
+                    <button onClick={this.toggleTemp} type="button" className="btn btn-primary">°C/°F</button>
                     <h5>Location: {timezone}</h5>
                     <ul>
-                        <li>Temperature: {temperature}°</li>
+                        <li>Temperature: {this.state.isCelsius ? ((temperature - 32) * 5 / 9).toFixed(0) + ' °C' : temperature + ' °F'}</li>
                         <li>Wind gust: {windGust}Km/h</li>
                         <li>Humidity: {humidity}%</li>
                         <li>Sunrise: {new Date(sunriseTime * 1000).toLocaleTimeString('it-IT')}</li>
-                        <li>Sunset: {new Date(sunsetTIme * 1000).toLocaleTimeString('it-IT')}</li>
+                        <li>Sunset: {new Date(sunsetTime * 1000).toLocaleTimeString('it-IT')}</li>
                     </ul>
                 </div>
 
