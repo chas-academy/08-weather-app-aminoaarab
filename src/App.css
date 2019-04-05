@@ -4,7 +4,7 @@
 }
 
 body {
-  background-image: linear-gradient(to bottom right, blue, red);
+  background-image: linear-gradient(to bottom right, rgb(37, 37, 250), rgb(247, 62, 62));
   background-repeat: no-repeat;
   background-attachment: fixed;
 
@@ -82,4 +82,12 @@ h3 {
   text-align: center;
 }
 
+
+.footer {
+  background-color: rgb(15, 15, 15);
+  
+  border: 2px solid black;
+  text-align: center;
+  color: red;
+}
  

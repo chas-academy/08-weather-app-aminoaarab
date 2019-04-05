@@ -1,16 +1,14 @@
-import React from 'react';
-
+import React, {Component} from 'react';
 
 import './App.css';
-
-
 import Geolocation from './components/Geolocation';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
-function App(){
- 
 
-  
+
+class App extends Component {
+  render () {
   return (
     <section>
       <div>
@@ -18,9 +16,12 @@ function App(){
       </div>
       <div>
         <Geolocation />
+        <Footer />
       </div>
     </section>
+
   )
+}
 }
 
 

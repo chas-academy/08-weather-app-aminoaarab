@@ -19,7 +19,8 @@ class Geolocation extends Component {
         sunset: [],
         weeklyWeather: [],
         hourlyWeather: [],
-        isCelsius: false
+        isCelsius: false,
+
     }
 
 
@@ -35,7 +36,7 @@ class Geolocation extends Component {
 
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
-                axios.get(`${darkskyBaseUrl}/${darkKey}/${position.coords.latitude},${position.coords.longitude}`)
+                axios.get(`${darkskyBaseUrl}/${darkKey}/${position.coords.latitude},${position.coords.longitude}?units=si`)
                     .then(res => {
                         this.setState({
                             sunriseTime: res.data.daily.data[0].sunriseTime,
@@ -51,7 +52,9 @@ class Geolocation extends Component {
                     })
             })
         } else {
-            console.log("something went wrong")
+            return (
+                <h2>"Something went wrong, try again!"</h2>
+            )
         }
     }
 
@@ -62,14 +65,14 @@ class Geolocation extends Component {
             <ul key={index} className="weekSum">
                 <li>{new Date(week.time * 1000).toLocaleDateString('it-IT')}</li>
                 <li>{week.summary}</li>
-                <li>Max: {this.state.isCelsius ? ((week.temperatureMax - 32) * 5 / 9).toFixed(0) + ' °C' : week.temperatureMax + ' °F'}</li>
-                <li>Min: {this.state.isCelsius ? ((week.temperatureMin - 32) * 5 / 9).toFixed(0) + ' °C' : week.temperatureMin + ' °F'}</li>
+                <li>Max: {this.state.isCelsius ? ((week.temperatureMax - 32) * 5 / 9).toFixed(0) + ' °F' : week.temperatureMax + ' °C'}</li>
+                <li>Min: {this.state.isCelsius ? ((week.temperatureMin - 32) * 5 / 9).toFixed(0) + ' °F' : week.temperatureMin + ' °C'}</li>
             </ul>
         )
         const hourWeather = hourlyWeather.map((hour, index) =>
             <ul key={index} className="hourlyWeather" >
                 <li>Date: {new Date(hour.time * 1000).toLocaleString('it-IT')}</li>
-                <li>Temperature: {this.state.isCelsius ? ((hour.temperature - 32) * 5 / 9).toFixed(0) + ' °C' : hour.temperature + ' °F'}</li>
+                <li>Temperature: {this.state.isCelsius ? ((hour.temperature - 32) * 5 / 9).toFixed(0) + ' °F' : hour.temperature + ' °C'}</li>
             </ul>
         )
 
@@ -77,10 +80,10 @@ class Geolocation extends Component {
             <section className="GeolocationHead">
                 <h3>Hello, the current weather at your location.</h3>
                 <div className="infoGeoLoc">
-                    <button onClick={this.toggleTemp} type="button" className="btn btn-primary">°C/°F</button>
+                    <button onClick={this.toggleTemp} type="button" className="btn btn-primary">{this.state.isCelsius ? 'Celsius °' : 'Fahrenheit °'}</button>
                     <h5>Location: {timezone}</h5>
                     <ul>
-                        <li>Temperature: {this.state.isCelsius ? ((temperature - 32) * 5 / 9).toFixed(0) + ' °C' : temperature + ' °F'}</li>
+                        <li>Temperature: {this.state.isCelsius ? ((temperature - 32) * 5 / 9).toFixed(0) + ' °F' : temperature + ' C°'}</li>
                         <li>Wind gust: {windGust}Km/h</li>
                         <li>Humidity: {humidity}%</li>
                         <li>Sunrise: {new Date(sunriseTime * 1000).toLocaleTimeString('it-IT')}</li>
