@@ -1,6 +1,6 @@
 {
     "version": 2,
-    "name": "http://aminoaarab.github.io/weather-app/",
+    "name": "http://aminoaarab.weather-app/",
     "builds": [
         { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build" } }
     ],

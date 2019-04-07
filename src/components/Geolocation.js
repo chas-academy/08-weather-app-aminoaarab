@@ -19,6 +19,7 @@ class Geolocation extends Component {
         sunset: [],
         weeklyWeather: [],
         hourlyWeather: [],
+        status: [],
         isCelsius: false,
 
     }
@@ -46,21 +47,26 @@ class Geolocation extends Component {
                             humidity: res.data.currently.humidity,
                             timezone: res.data.timezone,
                             weeklyWeather: res.data.daily.data.slice(0, 5),
-                            hourlyWeather: res.data.hourly.data.filter((_, i) => i % 3 === 0).slice(0, 6)
+                            hourlyWeather: res.data.hourly.data.filter((_, i) => i % 3 === 0).slice(0, 6),
+                            status: res.status
                         })
-                        console.log(res);
                     })
+                    .catch(error => console.log('Error', error));
             })
-        } else {
-            return (
-                <h2>"Something went wrong, try again!"</h2>
-            )
         }
+        
     }
 
     render() {
-        const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTime, weeklyWeather, hourlyWeather } = this.state;
+        const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTime, weeklyWeather, hourlyWeather, status } = this.state;
 
+        if(status !='200'){
+            return (
+                <h2>Sometimes it takes 5 second for page to load. Otherwise something is wrong and location can't be found.</h2>
+                
+            )
+        }
+         
         const weekWeather = weeklyWeather.map((week, index) =>
             <ul key={index} className="weekSum">
                 <li>{new Date(week.time * 1000).toLocaleDateString('it-IT')}</li>
@@ -76,6 +82,7 @@ class Geolocation extends Component {
             </ul>
         )
 
+        
         return (
             <section className="GeolocationHead">
                 <h3>Hello, the current weather at your location.</h3>
