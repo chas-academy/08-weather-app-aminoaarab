@@ -21,13 +21,14 @@ class Geolocation extends Component {
         hourlyWeather: [],
         status: [],
         isCelsius: false,
-
     }
 
 
     componentDidMount() {
         this.toggleTemp()
-     }
+    }
+
+
 
     toggleTemp = () => {
 
@@ -53,20 +54,45 @@ class Geolocation extends Component {
                     })
                     .catch(error => console.log('Error', error));
             })
-        }
-        
+        } 
     }
 
     render() {
         const { windGust, humidity, timezone, temperature, sunriseTime, sunsetTime, weeklyWeather, hourlyWeather, status } = this.state;
 
-        if(status !='200'){
+        if (status != '200') {
+            axios.get(`${darkskyBaseUrl}/${darkKey}/59.33469469999999,18.0523636?units=si`)
+            .then(res => {
+                this.setState({
+                    sunriseTime: res.data.daily.data[0].sunriseTime,
+                    sunsetTime: res.data.daily.data[0].sunsetTime,
+                    temperature: res.data.currently.temperature,
+                    windGust: res.data.currently.windGust,
+                    humidity: res.data.currently.humidity,
+                    timezone: res.data.timezone
+                })
+            })
+
             return (
-                <h2>Sometimes it takes 5 second for page to load. Otherwise something is wrong and location can't be found.</h2>
-                
+                <section>
+                <h2>Allow location to see weather. Then refresh page...</h2>
+
+                <h4>Default settings set to Stockholm:</h4>
+                <div className="infoGeoLoc">
+                <button onClick={this.toggleTemp} type="button" className="btn btn-primary">{this.state.isCelsius ? 'Celsius °' : 'Fahrenheit °'}</button>
+                <h5>Location: {timezone}</h5>
+                <ul>
+                    <li>Temperature: {this.state.isCelsius ? ((temperature - 32) * 5 / 9).toFixed(0) + ' °F' : temperature + ' C°'}</li>
+                    <li>Wind gust: {windGust}Km/h</li>
+                    <li>Humidity: {humidity}%</li>
+                    <li>Sunrise: {new Date(sunriseTime * 1000).toLocaleTimeString('it-IT')}</li>
+                    <li>Sunset: {new Date(sunsetTime * 1000).toLocaleTimeString('it-IT')}</li>
+                </ul>
+            </div>
+            </section>
             )
         }
-         
+
         const weekWeather = weeklyWeather.map((week, index) =>
             <ul key={index} className="weekSum">
                 <li>{new Date(week.time * 1000).toLocaleDateString('it-IT')}</li>
@@ -82,7 +108,7 @@ class Geolocation extends Component {
             </ul>
         )
 
-        
+
         return (
             <section className="GeolocationHead">
                 <h3>Hello, the current weather at your location.</h3>
